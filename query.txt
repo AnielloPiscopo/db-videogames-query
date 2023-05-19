@@ -88,13 +88,13 @@ where videogame_id = 412;
 12- Selezionare il numero di videogame che la software house con ID = 1 ha rilasciato nel 2018 (13)
 select count(*) 
 from videogames v 
-where software_house_id = 1 AND year(release_date) = 2018;
+where software_house_id = 1 and year(release_date) = 2018;
 
 
 
 
 
-Esercizi GROUP BY
+Esercizi limit
 1- Contare quante software house ci sono per ogni paese (3)
 select sh.country  , count(*) as num_software_houses
 from Videogames.software_houses sh 
@@ -240,7 +240,7 @@ from awards a
         on v.id = tv.videogame_id 
     join tournaments t 
         on tv.tournament_id = t.id
-where a.name LIKE "gioco dell'anno" AND av.`year` = 2018;
+where a.name LIKE "gioco dell'anno" and av.`year` = 2018;
 
 
 
@@ -259,4 +259,34 @@ from awards a
         on t.id = pt.tournament_id 
     join players p 
         on pt.player_id = p.id
-where a.name LIKE "gioco più atteso" AND av.`year` = 2018 AND t.`year` = 2019;
+where a.name LIKE "gioco più atteso" and av.`year` = 2018 and t.`year` = 2019;
+
+
+
+Bonus
+10- Selezionare i dati della prima software house che ha rilasciato un gioco, assieme ai dati del gioco stesso (software house id : 5)
+select *
+from Videogames.software_houses sh
+    join Videogames.videogames v 
+        on sh.id = v.software_house_id
+order by v.release_date
+limit 1;
+
+
+
+11- Selezionare i dati del videogame (id, name, release_date, totale recensioni) con più recensioni (videogame id : potrebbe uscire 449 o 398, sono entrambi a 20)
+select v.id, count(r.id) as num_reviews
+from Videogames.videogames v
+    join Videogames.reviews r  
+        on v.id = r.videogame_id
+limit 1
+order by num_reviews desc
+limit 1;
+
+
+
+12- Selezionare la software house che ha vinto più premi tra il 2015 e il 2016 (software house id : potrebbe uscire 3 o 1, sono entrambi a 3)
+
+
+
+13- Selezionare le categorie dei videogame i quali hanno una media recensioni inferiore a 2 (10)
