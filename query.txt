@@ -77,6 +77,21 @@ where r.rating = 5;
 
 
 
+Bonus
+11- Selezionare il numero e la media delle recensioni per il videogioco con ID = 412 (review number = 12, avg_rating = 3.16 circa)
+select count(rating), avg(rating) 
+from reviews r
+where videogame_id = 412;
+
+
+
+12- Selezionare il numero di videogame che la software house con ID = 1 ha rilasciato nel 2018 (13)
+select count(*) 
+from videogames v 
+where software_house_id = 1 AND year(release_date) = 2018;
+
+
+
 
 
 Esercizi GROUP BY
